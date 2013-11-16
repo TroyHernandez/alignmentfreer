@@ -10,13 +10,13 @@ test_that("CalcNumLocIrreg works", {
               equals(list(num.perms = 4, extra.letters.vec = 1)))
 })
 
-test_that("CalcPermutationMat vector works", {
+test_that("CalcPermutationMat works", {
   expect_that(CalcPermutationMat("RY", c(2, 2)),
               equals(matrix(c("G", "G", "A", "A", "T", "C", "T", "C"),
                             nrow = 4)))
 })
 
-test_that("CalcPermutationMat vector works", {
+test_that("AddToTblKmer works", {
   expect_that(AddToTblKmer(perm.mat = CalcPermutationMat("N",4),
                            kmers = c("A", "C", "G", "T"), reg.tbl = rep(0,4),
                            tbl = table("N"), kmer.seq = "N",

@@ -7,10 +7,10 @@ CalcMeanKmerList <- function(kmer.seq, tbl, statistic, kmers) {
   ans.temp <- rep(0, length(kmers))
   if (statistic > 1) {
     for (i in 1:length(kmers)) {
-      temp <- which(kmer.seq == kmers[i]) - 1
+      temp <- which(kmer.seq == kmers[i])
       ans.temp[i] <- mean(temp) / length(kmer.seq)
       #Handle kmer.list in uniform(0, 1) for computational efficiency
-      kmer.list[[i]] <- ((which(kmer.seq == kmers[i]) - 1) / length(kmer.seq))
+      kmer.list[[i]] <- (which(kmer.seq == kmers[i]) / length(kmer.seq))
       - ans.temp[i]
     }
   }
