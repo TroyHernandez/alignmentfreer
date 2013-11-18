@@ -86,11 +86,12 @@ CorrectSingletonCases <- function(ans, statistic, method = "Moment") {
 
 #######################################################################
 
-CalcIrregMeanKmerList <- function(kmer.seq, tbl, irreg.names, kmers, ans) {
+CalcIrregKmerList <- function(kmer.seq, tbl, irreg.names, kmers, ans) {
   
   # Initialize with zeroes as place holders
   kmer.list <- as.list(rep(0, length(kmers)))
-  names(kmer.list) <- kmers
+  kmer.wt.list <- as.list(rep(0, length(kmers)))
+  names(kmer.list) <- names(kmer.wt.list) <- kmers
   reg.tbl <- rep(0, length(kmers))
   names(reg.tbl) <- kmers
   
@@ -101,23 +102,62 @@ CalcIrregMeanKmerList <- function(kmer.seq, tbl, irreg.names, kmers, ans) {
     #if the name DNE
     if (length(ind) < 1) {
       allocate.irreg.kmers <- AllocateIrregKmers(irreg.name, kmers, reg.tbl,
-                                                 tbl, kmer.seq, kmer.list)
+                                                 tbl, kmer.seq, kmer.list,
+                                                 kmer.wt.list)
       reg.tbl <- allocate.irreg.kmers$reg.tbl
       kmer.list <- allocate.irreg.kmers$kmer.list
+      kmer.wt.list <- allocate.irreg.kmers$kmer.wt.list
     }else{
-      reg.tbl[ind] <- reg.tbl[ind] + tbl[irreg.name]
-      kmer.list[[ind]] <- c(kmer.list[[ind]], which(kmer.seq == kmers[ind]))
+      # Ensuring there exists an instance to avoid throwing NA.
+      count <- tbl[irreg.name]
+      if (!is.na(count)) {
+        reg.tbl[ind] <- reg.tbl[ind] + count
+        kmer.ind <- which(kmer.seq == kmers[ind])
+        kmer.list[[ind]] <- c(kmer.list[[ind]], kmer.ind)
+        kmer.wt.list[[ind]] <- c(kmer.wt.list[[ind]],
+                                 rep(1,length(kmer.ind)))
+      }
     }
   }
   
   #Remove initial zeroes
   for(i in 1:length(kmers)){
     kmer.list[[i]] <- kmer.list[[i]][-1]
+    kmer.wt.list[[i]] <- kmer.wt.list[[i]][-1]
+  }
+
+  ans[1, ] <- tbl <- reg.tbl
+
+  list(kmer.list = kmer.list, kmer.wt.list = kmer.wt.list,
+       tbl = reg.tbl, ans = ans)
+}
+
+#######################################################################
+CalcIrregDescriptiveStats <- function(ans, kmer.list, kmer.wt.list,
+                                      statistic, method) {
+  
+  if (statistic > 1) {
+    ans[2, ] <- unlist(lapply(1:length(kmers),
+                         function(i, x, w) weighted.mean(x[[i]],w[[i]]),
+                         x = kmer.list, w = kmer.wt.list))
   }
   
-  tbl <- reg.tbl
-  ans[1, ] <- tbl
-  ans[2, ] <- unlist(lapply(kmer.list,sum))/reg.tbl
-
-  list(kmer.list = kmer.list, tbl = reg.tbl, ans = ans)
+  if (statistic > 2) {
+    for (j in 3:statistic) {
+      if (method == "Moment") {
+        cat("Moment method not ready for irregular letters.")
+        stop()
+        ans[j, ] <- unlist(lapply(lapply(kmer.list, "^", (j - 1)), 
+                                  sum)) / ans[1, ]
+      } else if (method == "Sufficient") {
+        ans[j, ] <- IrregSufficientStats(kmer.list, kmer.wt.list, j)
+      } else if (method == "Lmoment") {
+        cat("LMoment method not ready for irregular letters.")
+        stop()
+        ans[j, ] <- LmomentStats(kmer.list, j)
+      }
+    }
+  }
+  
+  ans
 }

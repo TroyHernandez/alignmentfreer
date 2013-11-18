@@ -73,13 +73,15 @@ CalcIrregLetters <- function (kmer.seq, statistic, kmers, method = "Moment") {
   tbl <- table(kmer.seq)
   irreg.names <- names(tbl)
   
-  irreg.kmer.list <- CalcIrregMeanKmerList(kmer.seq, tbl,
+  irreg.kmer.list <- CalcIrregKmerList(kmer.seq, tbl,
                                            irreg.names, kmers, ans)
   tbl <- irreg.kmer.list$tbl
   kmer.list <- irreg.kmer.list$kmer.list
+  kmer.wt.list <- irreg.kmer.list$kmer.wt.list
   ans <- irreg.kmer.list$ans
 
-  ans <- CalcDescriptiveStats(ans, kmer.list, statistic, method)
+  ans <- CalcIrregDescriptiveStats(ans, kmer.list, kmer.wt.list,
+                                   statistic, method)
   
   if (statistic > 1) {
     ans <- CorrectZeroCases(ans, statistic)

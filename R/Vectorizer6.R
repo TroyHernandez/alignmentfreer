@@ -73,7 +73,7 @@ CalcPermutationMat <- function(irreg.name, num.perms) {
 ###################################################################
 
 AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
-                         kmer.seq, kmer.list, irreg.name) {
+                         kmer.seq, kmer.list, kmer.wt.list, irreg.name) {
   #paste letters back together and overwrite xac matrix
   overwrite <- apply(perm.mat, 1, paste, collapse = "")
   for (j in 1:length(overwrite)) {
@@ -85,7 +85,24 @@ AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
     #Add positions to kmer.list 
     kmer.ind <- which(kmer.seq == irreg.name)
     kmer.list[[kmers[overwrite.ind]]] <- c(kmer.list[[kmers[overwrite.ind]]],
-                                           kmer.ind / length(overwrite))
+                                           kmer.ind)
+    kmer.wt.list[[kmers[overwrite.ind]]] <-
+      c(kmer.wt.list[[kmers[overwrite.ind]]],
+        rep(1 / length(overwrite), length(kmer.ind)))
   }
-  list(kmer.list = kmer.list, reg.tbl = reg.tbl)
+  list(kmer.list = kmer.list, kmer.wt.list = kmer.wt.list, reg.tbl = reg.tbl)
+}
+
+weighted.var <- function(x, w, na.rm = FALSE) {
+  # https://stat.ethz.ch/pipermail/r-help/2008-July/168762.html
+  # By Gavin Simpson
+  if (na.rm) {
+    w <- w[i <- !is.na(x)]
+    x <- x[i]
+  }
+  sum.w <- sum(w)
+  sum.w2 <- sum(w^2)
+  mean.w <- sum(x * w) / sum(w)
+  (sum.w / (sum.w^2 - sum.w2)) * sum(w * (x - mean.w)^2, na.rm =
+                                       na.rm)
 }

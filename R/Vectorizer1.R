@@ -22,7 +22,7 @@ Vectorizer <- function(dna.seq, kmer = 3, statistic = 3,
   for (k in range) {
     cat("Calculating ", k, "-mer\n", sep = "")
 #     Test string
-#     dna.seq <- "NB"
+    dna.seq <- "NA"
 #     dna.seq <- paste(sample(c("A","C","G","T","B","N"),12,replace=T),
 #                      collapse="")
     
@@ -32,7 +32,8 @@ Vectorizer <- function(dna.seq, kmer = 3, statistic = 3,
     } else {
       kmer.seq <- ""
     }
-    temp.vec <- CalculateVec(kmer.seq, statistic, k, method = "Moment")
+    temp.vec <- CalculateVec(kmer.seq, statistic,
+                             kmer = k, method = "Sufficient")
     
     temp.cols <- ColumnFinder(k, statistic, length(vec), concatenate)
     vec[1, temp.cols] <- temp.vec$vector

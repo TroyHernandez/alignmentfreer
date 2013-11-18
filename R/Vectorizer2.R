@@ -42,7 +42,7 @@ KmerColNames <- function(kmer = 3, statistic = 3, concatenate = TRUE) {
 ###         other  -- number of letters other than a,c,g,t
 ###         letter -- distinct letters in the sequence
 CalculateVec <- function(kmer.seq, statistic = 3,
-                         k = 3, method = "Sufficient") {
+                         kmer = 3, method = "Sufficient") {
   
   seq.length <- length(kmer.seq)
   ans <- rep(0, 4 ^ kmer * statistic)  
