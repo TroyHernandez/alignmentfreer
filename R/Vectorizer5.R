@@ -51,25 +51,25 @@ AllocateIrregKmers <- function(irreg.name, kmers, reg.tbl,
 }
 
 #########################################################################
-IrregSufficientStats <- function(kmer.list, kmer.wt.list, j){
-  if (j == 3) {
-    ss <- unlist(lapply(1:length(kmers),
+IrregSufficientStats <- function(kmer.list, kmer.wt.list, statistic){
+  if (statistic == 3) {
+    ss <- unlist(lapply(1:length(kmer.list),
                         function(i, x, w) weighted.var(x[[i]],w[[i]]),
                         x = kmer.list, w = kmer.wt.list))
   }
-  if (j == 4) {
-    cat("Skewness not ready.")
-    stop()
-    ss <- unlist(lapply(kmer.list, skewness))
+  if (statistic == 4) {
+    ss <- unlist(lapply(1:length(kmer.list),
+                        function(i, x, w) weighted.skew(x[[i]],w[[i]]),
+                        x = kmer.list, w = kmer.wt.list))
   }
-  if (j == 5) {
-    cat("Kurtosis not ready.")
-    stop()
-    ss <- unlist(lapply(kmer.list, kurtosis))
+  if (statistic == 5) {
+    ss <- unlist(lapply(1:length(kmer.list),
+                        function(i, x, w) weighted.kur(x[[i]],w[[i]]),
+                        x = kmer.list, w = kmer.wt.list))
   }
-  if (j > 5) {
+  if (statistic > 5) {
     cout("WARNING!!! Method Sufficient not able to handle
-         statistics greater than 5; i.e. kurtosis.\n")
+         statistics greater than 5.\n")
     stop()
   }
   ss

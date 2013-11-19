@@ -93,16 +93,60 @@ AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
   list(kmer.list = kmer.list, kmer.wt.list = kmer.wt.list, reg.tbl = reg.tbl)
 }
 
+###################################################################
+
 weighted.var <- function(x, w, na.rm = FALSE) {
   # https://stat.ethz.ch/pipermail/r-help/2008-July/168762.html
-  # By Gavin Simpson
+  # By Gavin Simpson; accessed 11.18.13
   if (na.rm) {
     w <- w[i <- !is.na(x)]
     x <- x[i]
   }
-  sum.w <- sum(w)
-  sum.w2 <- sum(w^2)
-  mean.w <- sum(x * w) / sum(w)
-  (sum.w / (sum.w^2 - sum.w2)) * sum(w * (x - mean.w)^2, na.rm =
-                                       na.rm)
+  v1 <- sum(w)
+  v2 <- sum(w ^ 2)
+  x.bar <- sum(x * w) / v1
+  m2 <- sum(w * (x - x.bar) ^ 2) / v1
+  (v1 ^ 2 / (v1 ^ 2 - v2)) * m2
+}
+
+###################################################################
+
+weighted.skew <- function(x, w, na.rm = FALSE) {
+  # http://arxiv.org/abs/1304.6564
+  # Lorenzo Rimoldini; accessed 11.19.13
+  if (na.rm) {
+    w <- w[i <- !is.na(x)]
+    x <- x[i]
+  }
+  v1 <- sum(w)
+  v2 <- sum(w ^ 2)
+  v3 <- sum(w ^ 3)
+  x.bar <- sum(x * w) / v1
+  m3 <- sum(w * (x - x.bar) ^ 3) / v1
+  
+  (v1 ^ 3 / (v1 ^ 3 - 3 * v1 * v2 + 2 * v3)) * m3
+}
+
+###################################################################
+
+weighted.kur <- function(x, w, na.rm = FALSE) {
+  # http://arxiv.org/abs/1304.6564
+  # Lorenzo Rimoldini; accessed 11.19.13
+  if (na.rm) {
+    w <- w[i <- !is.na(x)]
+    x <- x[i]
+  }
+  v1 <- sum(w)
+  v2 <- sum(w ^ 2)
+  v3 <- sum(w ^ 3)
+  v4 <- sum(w ^ 4)
+  x.bar <- sum(x * w) / v1
+  m2 <- sum(w * (x - x.bar) ^ 2) / v1
+  m4 <- sum(w * (x - x.bar) ^ 4) / v1
+  denom <- (v1 ^ 2 - v2) *
+    (v1 ^ 4 - 6 * v1 ^ 2 * v2 + 8 * v1 * v3 + 3 * v2 ^ 2 - 6 * v4)
+  num1 <- v1 ^ 2 * (v1 ^ 4 - 4 * v1 * v3 + 3 * v2 ^ 2)
+  num2 <- 3 * v1 ^ 2 * (v1 ^ 4 - 2 * v1 ^ 2 * v2 + 4 * v1 * v3 - 3 * v2 ^ 2)
+  
+  (num1 / denom * m4 - num2 / denom * m2 ^ 2)
 }
