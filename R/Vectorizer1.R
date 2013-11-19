@@ -22,7 +22,8 @@ Vectorizer <- function(dna.seq, kmer = 3, statistic = 3,
   for (k in range) {
     cat("Calculating ", k, "-mer\n", sep = "")
 #     Test string
-    dna.seq <- "NA"
+#     dna.seq <- "NA"
+    dna.seq <- "GATTACA"
 #     dna.seq <- paste(sample(c("A","C","G","T","B","N"),12,replace=T),
 #                      collapse="")
     
