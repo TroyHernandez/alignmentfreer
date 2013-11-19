@@ -5,8 +5,8 @@ test_that("SufficientStats works", {
     equals(0.5))
 })
 
-test_that("AllocateIrregKmers works", {
-  expect_that(AllocateIrregKmers(irreg.name = "N",
+test_that("AllocateAmbigKmers works", {
+  expect_that(AllocateAmbigKmers(ambig.name = "N",
                                  kmers = c("A", "C", "G", "T"),
                                  reg.tbl = rep(0,4), tbl = table("N"),
                                  kmer.seq = "N",
@@ -20,8 +20,8 @@ test_that("AllocateIrregKmers works", {
                           reg.tbl = rep(.25, 4))))
 })
 
-test_that("IrregSufficientStats works", {
-  expect_that(IrregSufficientStats(kmer.list = list(c(0, 1)),
+test_that("AmbigSufficientStats works", {
+  expect_that(AmbigSufficientStats(kmer.list = list(c(0, 1)),
                                    kmer.wt.list = list(c(.25, 1)),
                                    statistic = 3),
               equals(0.5))

@@ -68,19 +68,19 @@ CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers, method = "Moment") {
 
 ################################################################
 
-CalcIrregLetters <- function (kmer.seq, statistic, kmers, method = "Moment") {
+CalcAmbigLetters <- function (kmer.seq, statistic, kmers, method = "Moment") {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   tbl <- table(kmer.seq)
-  irreg.names <- names(tbl)
+  ambig.names <- names(tbl)
   
-  irreg.kmer.list <- CalcIrregKmerList(kmer.seq, tbl,
-                                           irreg.names, kmers, ans)
-  tbl <- irreg.kmer.list$tbl
-  kmer.list <- irreg.kmer.list$kmer.list
-  kmer.wt.list <- irreg.kmer.list$kmer.wt.list
-  ans <- irreg.kmer.list$ans
+  ambig.kmer.list <- CalcAmbigKmerList(kmer.seq, tbl,
+                                           ambig.names, kmers, ans)
+  tbl <- ambig.kmer.list$tbl
+  kmer.list <- ambig.kmer.list$kmer.list
+  kmer.wt.list <- ambig.kmer.list$kmer.wt.list
+  ans <- ambig.kmer.list$ans
 
-  ans <- CalcIrregDescriptiveStats(ans, kmer.list, kmer.wt.list,
+  ans <- CalcAmbigDescriptiveStats(ans, kmer.list, kmer.wt.list,
                                    statistic, method)
   
   if (statistic > 1) {

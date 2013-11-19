@@ -1,12 +1,12 @@
 context("Vector checks")
 
-test_that("CalcNumLocIrreg works", {
-  expect_that(CalcNumLocIrreg("D"),
+test_that("CalcNumLocAmbig works", {
+  expect_that(CalcNumLocAmbig("D"),
     equals(list(num.perms = 3, extra.letters.vec = 2)))
 })
 
-test_that("CalcNumLocIrreg works", {
-  expect_that(CalcNumLocIrreg("N"),
+test_that("CalcNumLocAmbig works", {
+  expect_that(CalcNumLocAmbig("N"),
               equals(list(num.perms = 4, extra.letters.vec = 1)))
 })
 
@@ -22,7 +22,7 @@ test_that("AddToTblKmer works", {
                            tbl = table("N"), kmer.seq = "N",
                            kmer.list = list(A = 0, C = 0, G = 0, T = 0),
                            kmer.wt.list = list(A = 0, C = 0, G = 0, T = 0),
-                           irreg.name = "N"),
+                           ambig.name = "N"),
               equals(list(kmer.list = list(A = c(0, 1), C = c(0, 1),
                                            G = c(0, 1), T = c(0, 1)),
                           kmer.wt.list = list(A = c(0, .25), C = c(0, .25),

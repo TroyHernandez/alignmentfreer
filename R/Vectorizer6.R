@@ -2,19 +2,19 @@
 
 ##############################################################
 
-CalcNumLocIrreg <- function(irreg.name) {
+CalcNumLocAmbig <- function(ambig.name) {
   
-  num.perms <- rep(1, nchar(irreg.name))
-  extra.letters.vec <- rep(0, nchar(irreg.name))
+  num.perms <- rep(1, nchar(ambig.name))
+  extra.letters.vec <- rep(0, nchar(ambig.name))
   
-  for (j in 1:nchar(irreg.name)) {
+  for (j in 1:nchar(ambig.name)) {
     # Iterate through kExtraLetters
     for (h in 1:3) {
-      num.char <- nchar(irreg.name)
-      extra.letter.pos <- which(substring(irreg.name,
+      num.char <- nchar(ambig.name)
+      extra.letter.pos <- which(substring(ambig.name,
                                           1:num.char,
                                           1:num.char)[j] == kExtraLetters[[h]])
-      # Check to see letter is irregular;
+      # Check to see letter is ambigular;
       # create vector to determine nrow of matrix
       if (length(extra.letter.pos) > 0) {
         num.perms[j] <- h + 1
@@ -39,21 +39,21 @@ kExtraLettersList <- list(kTwoLettersList, kThreeLettersList, kFourLettersList)
 
 ###############################################################
 
-CalcPermutationMat <- function(irreg.name, num.perms) {
-  num.char <- nchar(irreg.name)
-  perm.mat <- matrix(substring(irreg.name, 1:num.char, 1:num.char),
+CalcPermutationMat <- function(ambig.name, num.perms) {
+  num.char <- nchar(ambig.name)
+  perm.mat <- matrix(substring(ambig.name, 1:num.char, 1:num.char),
                      nrow = prod(num.perms),
-                     ncol = nchar(irreg.name), byrow = T)
-  irreg.ind <- which(num.perms!=1)
+                     ncol = nchar(ambig.name), byrow = T)
+  ambig.ind <- which(num.perms!=1)
   #We use nrow.perm.mat to carve up matrix into rows later
   nrow.perm.mat <- nrow(perm.mat)
   #Going through each extra letter
-  for(j in 1:length(irreg.ind)){
-    ir.ind.j <- irreg.ind[j]
-    irreg.loc <-
+  for(j in 1:length(ambig.ind)){
+    ir.ind.j <- ambig.ind[j]
+    ambig.loc <-
       which(kExtraLetters[[num.perms[ir.ind.j] - 1]] == perm.mat[1, ir.ind.j])
     replacement.letters <-
-      kExtraLettersList[[num.perms[ir.ind.j] - 1]][[irreg.loc]]
+      kExtraLettersList[[num.perms[ir.ind.j] - 1]][[ambig.loc]]
     #The letters that get reinserted are permuted here.
     real.replace <- c()
     for (l in 1:length(replacement.letters)) {
@@ -73,17 +73,17 @@ CalcPermutationMat <- function(irreg.name, num.perms) {
 ###################################################################
 
 AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
-                         kmer.seq, kmer.list, kmer.wt.list, irreg.name) {
+                         kmer.seq, kmer.list, kmer.wt.list, ambig.name) {
   #paste letters back together and overwrite xac matrix
   overwrite <- apply(perm.mat, 1, paste, collapse = "")
   for (j in 1:length(overwrite)) {
     #Add to totals in reg.tbl
     overwrite.ind <- which(kmers == overwrite[j])
     reg.tbl[overwrite.ind] <-
-      reg.tbl[overwrite.ind] + tbl[irreg.name] / length(overwrite)
+      reg.tbl[overwrite.ind] + tbl[ambig.name] / length(overwrite)
     
     #Add positions to kmer.list 
-    kmer.ind <- which(kmer.seq == irreg.name)
+    kmer.ind <- which(kmer.seq == ambig.name)
     kmer.list[[kmers[overwrite.ind]]] <- c(kmer.list[[kmers[overwrite.ind]]],
                                            kmer.ind)
     kmer.wt.list[[kmers[overwrite.ind]]] <-

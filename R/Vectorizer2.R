@@ -56,13 +56,13 @@ CalculateVec <- function(kmer.seq, statistic = 3,
     if (sum(names(tbl) != kmers) == 0) {
       ans <- CalcRegLetters(kmer.seq, tbl, statistic, kmers, method)
     } else {
-      ans <- CalcIrregLetters(kmer.seq, statistic, kmers, method)
+      ans <- CalcAmbigLetters(kmer.seq, statistic, kmers, method)
     }
   } else {
     if (sum(kmer.seq == "") > 0) {
       ans <- CalcEmptyLetters(kmer.seq, tbl, statistic, kmers)
     } else {
-      ans <- CalcIrregLetters(kmer.seq, statistic, kmers, method)
+      ans <- CalcAmbigLetters(kmer.seq, statistic, kmers, method)
     }
   }
   

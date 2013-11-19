@@ -31,18 +31,18 @@ SufficientStats <- function(kmer.list = kmer.list, j = j){
 
 #########################################################################
 
-AllocateIrregKmers <- function(irreg.name, kmers, reg.tbl,
+AllocateAmbigKmers <- function(ambig.name, kmers, reg.tbl,
                                tbl, kmer.seq, kmer.list, kmer.wt.list) {
   #Check each letter of the name
-  num.loc.irreg <- CalcNumLocIrreg(irreg.name)
-  num.perms <- num.loc.irreg$num.perms
-#   extra.letters.vec <- num.loc.irreg$extra.letters.vec
+  num.loc.ambig <- CalcNumLocAmbig(ambig.name)
+  num.perms <- num.loc.ambig$num.perms
+#   extra.letters.vec <- num.loc.ambig$extra.letters.vec
   
-  #substring(irreg.names[i],1:k,1:k)
-  perm.mat <- CalcPermutationMat(irreg.name,num.perms)
+  #substring(ambig.names[i],1:k,1:k)
+  perm.mat <- CalcPermutationMat(ambig.name,num.perms)
   
   add.to.tbl.kmer <- AddToTblKmer(perm.mat, kmers, reg.tbl, tbl,
-                                  kmer.seq, kmer.list, kmer.wt.list, irreg.name)
+                                  kmer.seq, kmer.list, kmer.wt.list, ambig.name)
   kmer.list <- add.to.tbl.kmer$kmer.list
   kmer.wt.list <- add.to.tbl.kmer$kmer.wt.list
   reg.tbl <- add.to.tbl.kmer$reg.tbl
@@ -51,7 +51,7 @@ AllocateIrregKmers <- function(irreg.name, kmers, reg.tbl,
 }
 
 #########################################################################
-IrregSufficientStats <- function(kmer.list, kmer.wt.list, statistic){
+AmbigSufficientStats <- function(kmer.list, kmer.wt.list, statistic){
   if (statistic == 3) {
     ss <- unlist(lapply(1:length(kmer.list),
                         function(i, x, w) weighted.var(x[[i]],w[[i]]),
