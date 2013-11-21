@@ -60,7 +60,7 @@ CalculateVec <- function(kmer.seq, statistic = 3,
     }
   } else {
     if (sum(kmer.seq == "") > 0) {
-      ans <- CalcEmptyLetters(kmer.seq, tbl, statistic, kmers)
+      ans <- CalcEmptyLetters(tbl, statistic, kmers)
     } else {
       ans <- CalcAmbigLetters(kmer.seq, statistic, kmers, method)
     }

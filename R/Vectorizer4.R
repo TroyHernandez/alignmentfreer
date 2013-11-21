@@ -38,7 +38,7 @@ CalcDescriptiveStats <- function(ans, kmer.list, statistic, method) {
 }
 
 ##########################################################################
-CorrectZeroCases <- function(ans, statistic, method = "Moment") {
+CorrectZeroCases <- function(ans, statistic, method = "Sufficient") {
   # Changes mean and moment entries with zero counts to
   # halfway mean and 0 moment
   if (sum(ans[1, ] == 0) > 0) {

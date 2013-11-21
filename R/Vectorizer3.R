@@ -43,7 +43,8 @@ StatAppender <- function(kmers, statistic) {
 }
 
 ##############################################################
-CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers, method = "Moment") {
+CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers,
+                           method = "Sufficient") {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   ans[1, ] <- tbl
   
@@ -68,7 +69,8 @@ CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers, method = "Moment") {
 
 ################################################################
 
-CalcAmbigLetters <- function (kmer.seq, statistic, kmers, method = "Moment") {
+CalcAmbigLetters <- function (kmer.seq, statistic, kmers,
+                              method = "Sufficient") {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   tbl <- table(kmer.seq)
   ambig.names <- names(tbl)
@@ -95,44 +97,9 @@ CalcAmbigLetters <- function (kmer.seq, statistic, kmers, method = "Moment") {
 }
 
 ##############################################################
-CalcEmptyLetters=function(x,tbl,d,kmers,KMERS,method="Moment"){
-  ans=matrix(0,nrow=d,ncol=length(kmers))
-  
-  if(d>1){
-    if(sum(ans[1,]==0)>0){
-      ind=which(ans[1,]==0)
-      ans[2,ind]=.5
-      if(d>2 & method=="Moment"){
-        ans[3:d,ind]=0
-      }
-      if(d>2 & method=="Sufficient"){
-        ans[3,ind]=0
-        if(d>3){
-          ans[4,ind]=0
-        }
-        if(d>4){
-          ans[5,ind]=-6/5
-        }
-      }
-    }
-    
-    #Changes mean and moment entries with single counts to halfway mean and 0 moment
-    ind=1:ncol(ans)
-    if(d>2 & method=="Moment"){
-      ans[3:d,ind]=0
-    }
-    if(d>2 & method=="Sufficient"){
-      ans[3,ind]=0
-      if(d>3){
-        ans[4,ind]=0
-      }
-      if(d>4){
-        ans[5,ind]=-6/5
-      }
-    }
-    
-  }
-  
-  ans=c(t(ans))
+CalcEmptyLetters=function(tbl, statistic, kmers, method = "Sufficient"){
+  ans <- matrix(0, nrow = statistic, ncol = length(kmers))
+  ans <- CorrectZeroCases(ans, statistic, method)
+  ans <- c(t(ans))
   ans
 }
