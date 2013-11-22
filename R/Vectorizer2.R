@@ -46,7 +46,7 @@ CalculateVec <- function(kmer.seq, statistic = 3,
   
   seq.length <- length(kmer.seq)
   ans <- rep(0, 4 ^ kmer * statistic)  
-  kmers <- KmerGenerator(k)
+  kmers <- KmerGenerator(kmer)
   
   #This is used to ensure there are only A, C, G, T.
   tbl <- table(c(kmer.seq, kmers)) - 1
@@ -71,6 +71,7 @@ CalculateVec <- function(kmer.seq, statistic = 3,
 
 ####################################################
 ColumnFinder <- function(k, statistic, length.vec, concatenate) {
+  # concatenate == F just removes the length column.
   if (!concatenate) {
     temp.cols <- 2:length.vec
   } else {
