@@ -1,6 +1,6 @@
 # Sequence_Extraction.R
 
-path <- "/home/troy/Dropbox/alignmentfreer/data/abalone.gbk"
+# path <- "/home/troy/Dropbox/alignmentfreer/data/abalone.gbk"
 
 GetSeqGbk <- function(path, upper = FALSE){
   
