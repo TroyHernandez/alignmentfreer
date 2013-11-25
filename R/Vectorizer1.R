@@ -11,14 +11,14 @@ source("Vectorizer6.R")
 #Main function for calculating natural vectors
 Vectorizer <- function(dna.seq, kmer = 1, statistic = 3,
                        composition = TRUE, concatenate = TRUE,
-                       sanity.check = FALSE, verbose = 0) {
+                       confirm.dna.seq = FALSE, verbose = 0) {
   
-  if (sanity.check == T) {
-    SanityCheck(dna.seq)
+  if (confirm.dna.seq == TRUE) {
+    ConfirmDnaSeq(dna.seq)
   }
   dna.seq <- UpperCaser(dna.seq)
-  range <- Ranger(kmer, concatenate)
-  col.names <- KmerColNames(kmer, statistic, concatenate)
+  range <- .Ranger(kmer, concatenate)
+  col.names <- .KmerColNames(kmer, statistic, concatenate)
   vec <- matrix(0, nrow = 1, ncol = length(col.names) + 1)
   colnames(vec) <- c("length", col.names)
   vec[1] <- nchar(dna.seq)
@@ -47,7 +47,7 @@ Vectorizer <- function(dna.seq, kmer = 1, statistic = 3,
     temp.vec <- CalculateVec(kmer.seq, statistic,
                              kmer = k, method = "Sufficient")
     
-    temp.cols <- ColumnFinder(k, statistic, length(vec), concatenate)
+    temp.cols <- .ColumnFinder(k, statistic, length(vec), concatenate)
     vec[1, temp.cols] <- temp.vec$vector
   }
   vec

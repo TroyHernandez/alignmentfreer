@@ -2,7 +2,7 @@
 
 
 #######################################################
-#k-mer generator in caps
+# k-mer generator in caps
 KmerGenerator <- function(kmer) {
   
   dna <- c("A","C","G","T")
@@ -20,8 +20,8 @@ KmerGenerator <- function(kmer) {
 }
 
 #######################################################
-#Appends statistic name to kmer 
-StatAppender <- function(kmers, statistic) {
+# Appends statistic name to kmer 
+.StatAppender <- function(kmers, statistic) {
   for (i in 1:statistic) {
     if (i == 1) {
       col.names <- paste("n", kmers, sep = "")
@@ -43,20 +43,20 @@ StatAppender <- function(kmers, statistic) {
 }
 
 ##############################################################
-CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers,
+.CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers,
                            method = "Sufficient") {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   ans[1, ] <- tbl
   
-  mean.kmer.list <- CalcMeanKmerList(kmer.seq, tbl, statistic, kmers)
+  mean.kmer.list <- .CalcMeanKmerList(kmer.seq, tbl, statistic, kmers)
   ans[2, ] <- mean.kmer.list$mean
   kmer.list <- mean.kmer.list$list
   
-  ans <- CalcDescriptiveStats(ans, kmer.list, statistic, method)
+  ans <- .CalcDescriptiveStats(ans, kmer.list, statistic, method)
   
   if (statistic > 1) {
-    ans <- CorrectZeroCases(ans, statistic)
-    ans <- CorrectSingletonCases(ans, statistic)
+    ans <- .CorrectZeroCases(ans, statistic)
+    ans <- .CorrectSingletonCases(ans, statistic)
   }
   
   # Changes counts to frequencies
@@ -69,25 +69,25 @@ CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers,
 
 ################################################################
 
-CalcAmbigLetters <- function (kmer.seq, statistic, kmers,
+.CalcAmbigLetters <- function (kmer.seq, statistic, kmers,
                               method = "Sufficient") {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   tbl <- table(kmer.seq)
   ambig.names <- names(tbl)
   
-  ambig.kmer.list <- CalcAmbigKmerList(kmer.seq, tbl,
+  ambig.kmer.list <- .CalcAmbigKmerList(kmer.seq, tbl,
                                            ambig.names, kmers, ans)
   tbl <- ambig.kmer.list$tbl
   kmer.list <- ambig.kmer.list$kmer.list
   kmer.wt.list <- ambig.kmer.list$kmer.wt.list
   ans <- ambig.kmer.list$ans
 
-  ans <- CalcAmbigDescriptiveStats(ans, kmer.list, kmer.wt.list,
+  ans <- .CalcAmbigDescriptiveStats(ans, kmer.list, kmer.wt.list,
                                    statistic, method)
   
   if (statistic > 1) {
-    ans <- CorrectZeroCases(ans, statistic)
-    ans <- CorrectSingletonCases(ans, statistic)
+    ans <- .CorrectZeroCases(ans, statistic)
+    ans <- .CorrectSingletonCases(ans, statistic)
   }
   
   ans[1, ] <- ans[1, ] / sum(ans[1, ])
@@ -97,9 +97,9 @@ CalcAmbigLetters <- function (kmer.seq, statistic, kmers,
 }
 
 ##############################################################
-CalcEmptyLetters=function(tbl, statistic, kmers, method = "Sufficient"){
+.CalcEmptyLetters=function(tbl, statistic, kmers, method = "Sufficient"){
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
-  ans <- CorrectZeroCases(ans, statistic, method)
+  ans <- .CorrectZeroCases(ans, statistic, method)
   ans <- c(t(ans))
   ans
 }

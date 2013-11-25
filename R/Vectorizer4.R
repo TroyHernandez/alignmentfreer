@@ -2,7 +2,7 @@
 
 #######################################################
 
-CalcMeanKmerList <- function(kmer.seq, tbl, statistic, kmers) {
+.CalcMeanKmerList <- function(kmer.seq, tbl, statistic, kmers) {
   kmer.list <- as.list(rep(0, length(kmers)))
   ans.temp <- rep(0, length(kmers))
   if (statistic > 1) {
@@ -20,16 +20,16 @@ CalcMeanKmerList <- function(kmer.seq, tbl, statistic, kmers) {
 
 #########################################################################
 
-CalcDescriptiveStats <- function(ans, kmer.list, statistic, method) {
+.CalcDescriptiveStats <- function(ans, kmer.list, statistic, method) {
   if (statistic > 2) {
     for (j in 3:statistic) {
       if (method == "Moment") {
         ans[j, ] <- unlist(lapply(lapply(kmer.list, "^", (j - 1)), 
                                   sum)) / ans[1, ]
       } else if (method == "Sufficient") {
-        ans[j, ] <- SufficientStats(kmer.list, j)
+        ans[j, ] <- .SufficientStats(kmer.list, j)
       } else if (method == "Lmoment") {
-        ans[j, ] <- LmomentStats(kmer.list, j)
+        ans[j, ] <- .LmomentStats(kmer.list, j)
       }
     }
   }
@@ -38,7 +38,7 @@ CalcDescriptiveStats <- function(ans, kmer.list, statistic, method) {
 }
 
 ##########################################################################
-CorrectZeroCases <- function(ans, statistic, method = "Sufficient") {
+.CorrectZeroCases <- function(ans, statistic, method = "Sufficient") {
   # Changes mean and moment entries with zero counts to
   # halfway mean and 0 moment
   if (sum(ans[1, ] == 0) > 0) {
@@ -63,7 +63,7 @@ CorrectZeroCases <- function(ans, statistic, method = "Sufficient") {
 
 #########################################################################
 
-CorrectSingletonCases <- function(ans, statistic, method = "Moment") {
+.CorrectSingletonCases <- function(ans, statistic, method = "Moment") {
   #Changes mean and moment entries with single counts to halfway mean and 0 moment
   if (sum(ans[1, ] > 0 & ans[1, ] <= 1) > 0) {
     ind <- which(ans[1, ] > 0 & ans[1, ] <= 1)
@@ -86,7 +86,7 @@ CorrectSingletonCases <- function(ans, statistic, method = "Moment") {
 
 #######################################################################
 
-CalcAmbigKmerList <- function(kmer.seq, tbl, ambig.names, kmers, ans) {
+.CalcAmbigKmerList <- function(kmer.seq, tbl, ambig.names, kmers, ans) {
   
   # Initialize with zeroes as place holders
   kmer.list <- as.list(rep(0, length(kmers)))
@@ -101,7 +101,7 @@ CalcAmbigKmerList <- function(kmer.seq, tbl, ambig.names, kmers, ans) {
     ind <- which(kmers == ambig.name)
     #if the name DNE
     if (length(ind) < 1) {
-      allocate.ambig.kmers <- AllocateAmbigKmers(ambig.name, kmers, reg.tbl,
+      allocate.ambig.kmers <- .AllocateAmbigKmers(ambig.name, kmers, reg.tbl,
                                                  tbl, kmer.seq, kmer.list,
                                                  kmer.wt.list)
       reg.tbl <- allocate.ambig.kmers$reg.tbl
@@ -133,7 +133,7 @@ CalcAmbigKmerList <- function(kmer.seq, tbl, ambig.names, kmers, ans) {
 }
 
 #######################################################################
-CalcAmbigDescriptiveStats <- function(ans, kmer.list, kmer.wt.list,
+.CalcAmbigDescriptiveStats <- function(ans, kmer.list, kmer.wt.list,
                                       statistic, method) {
   
   if (statistic > 1) {
@@ -150,7 +150,7 @@ CalcAmbigDescriptiveStats <- function(ans, kmer.list, kmer.wt.list,
         ans[j, ] <- unlist(lapply(lapply(kmer.list, "^", (j - 1)), 
                                   sum)) / ans[1, ]
       } else if (method == "Sufficient") {
-        ans[j, ] <- AmbigSufficientStats(kmer.list, kmer.wt.list, j)
+        ans[j, ] <- .AmbigSufficientStats(kmer.list, kmer.wt.list, j)
       } else if (method == "Lmoment") {
         cat("LMoment method not ready for ambiguous letters.")
         stop()

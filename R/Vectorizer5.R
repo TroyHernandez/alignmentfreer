@@ -1,7 +1,7 @@
 # Vectorizer5.R
 
 #########################################################################
-SufficientStats <- function(kmer.list = kmer.list, j = j){
+.SufficientStats <- function(kmer.list = kmer.list, j = j){
   if (j == 3) {
     ss <- unlist(lapply(kmer.list, var))
   }
@@ -20,7 +20,7 @@ SufficientStats <- function(kmer.list = kmer.list, j = j){
 }
 
 #########################################################################
-# LmomentStats=function(kmer.list=kmer.list,j=j){
+# .LmomentStats=function(kmer.list=kmer.list,j=j){
 #   if(j>5){
 #     cout("WARNING!!! Method Lmoments not currently able to handle dimension greater than 5; i.e. kurtosis.\n")
 #   }else{
@@ -31,17 +31,17 @@ SufficientStats <- function(kmer.list = kmer.list, j = j){
 
 #########################################################################
 
-AllocateAmbigKmers <- function(ambig.name, kmers, reg.tbl,
+.AllocateAmbigKmers <- function(ambig.name, kmers, reg.tbl,
                                tbl, kmer.seq, kmer.list, kmer.wt.list) {
   #Check each letter of the name
-  num.loc.ambig <- CalcNumLocAmbig(ambig.name)
+  num.loc.ambig <- .CalcNumLocAmbig(ambig.name)
   num.perms <- num.loc.ambig$num.perms
 #   extra.letters.vec <- num.loc.ambig$extra.letters.vec
   
   #substring(ambig.names[i],1:k,1:k)
-  perm.mat <- CalcPermutationMat(ambig.name,num.perms)
+  perm.mat <- .CalcPermutationMat(ambig.name,num.perms)
   
-  add.to.tbl.kmer <- AddToTblKmer(perm.mat, kmers, reg.tbl, tbl,
+  add.to.tbl.kmer <- .AddToTblKmer(perm.mat, kmers, reg.tbl, tbl,
                                   kmer.seq, kmer.list, kmer.wt.list, ambig.name)
   kmer.list <- add.to.tbl.kmer$kmer.list
   kmer.wt.list <- add.to.tbl.kmer$kmer.wt.list
@@ -51,7 +51,7 @@ AllocateAmbigKmers <- function(ambig.name, kmers, reg.tbl,
 }
 
 #########################################################################
-AmbigSufficientStats <- function(kmer.list, kmer.wt.list, statistic){
+.AmbigSufficientStats <- function(kmer.list, kmer.wt.list, statistic){
   if (statistic == 3) {
     ss <- unlist(lapply(1:length(kmer.list),
                         function(i, x, w) weighted.var(x[[i]],w[[i]]),

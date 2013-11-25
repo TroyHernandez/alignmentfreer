@@ -1,6 +1,6 @@
 # Vectorizer2.R
 
-SanityCheck <- function(dna.seq){
+ConfirmDnaSeq <- function(dna.seq){
   dna.seq.letters <- strsplit(dna.seq, "")[[1]]
   k.AmbigLettersBig <- c("R", "Y", "M", "K", "S", "W", "B", "D", "H", "V", "N")
   k.AmbigLettersSml <- c("r", "y", "m", "k", "s", "w", "b", "d", "h", "v", "n")
@@ -34,7 +34,7 @@ UpperCaser <- function(dna.seq){
 }
 #######################################################
 # Determines range for (un)concatenated vectors.
-Ranger <- function(kmer, concatenate)  {
+.Ranger <- function(kmer, concatenate)  {
   if (concatenate) {
     range <- 1:kmer
   } else {
@@ -43,16 +43,16 @@ Ranger <- function(kmer, concatenate)  {
 }
 
 #######################################################
-KmerColNames <- function(kmer = 3, statistic = 3, concatenate = TRUE) {
+.KmerColNames <- function(kmer = 3, statistic = 3, concatenate = TRUE) {
   
   #kmercolnames is final output
   kmer.colnames <- c()
   
-  range <- Ranger(kmer, concatenate)
+  range <- .Ranger(kmer, concatenate)
   
   for (j in range) {
     #append new round to total
-    kmer.colnames <- c(kmer.colnames, StatAppender(KmerGenerator(j), statistic))
+    kmer.colnames <- c(kmer.colnames, .StatAppender(KmerGenerator(j), statistic))
   }
   
   kmer.colnames
@@ -80,13 +80,13 @@ CalculateVec <- function(kmer.seq, statistic = 3,
     if (sum(names(tbl) != kmers) == 0) {
       ans <- CalcRegLetters(kmer.seq, tbl, statistic, kmers, method)
     } else {
-      ans <- CalcAmbigLetters(kmer.seq, statistic, kmers, method)
+      ans <- .CalcAmbigLetters(kmer.seq, statistic, kmers, method)
     }
   } else {
     if (sum(kmer.seq == "") > 0) {
-      ans <- CalcEmptyLetters(tbl, statistic, kmers)
+      ans <- .CalcEmptyLetters(tbl, statistic, kmers)
     } else {
-      ans <- CalcAmbigLetters(kmer.seq, statistic, kmers, method)
+      ans <- .CalcAmbigLetters(kmer.seq, statistic, kmers, method)
     }
   }
   
@@ -94,7 +94,7 @@ CalculateVec <- function(kmer.seq, statistic = 3,
 }
 
 ####################################################
-ColumnFinder <- function(k, statistic, length.vec, concatenate) {
+.ColumnFinder <- function(k, statistic, length.vec, concatenate) {
   # concatenate == F just removes the length column.
   if (!concatenate) {
     temp.cols <- 2:length.vec

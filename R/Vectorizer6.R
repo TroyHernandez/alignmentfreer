@@ -2,18 +2,18 @@
 
 ##############################################################
 
-CalcNumLocAmbig <- function(ambig.name) {
+.CalcNumLocAmbig <- function(ambig.name) {
   
   num.perms <- rep(1, nchar(ambig.name))
   extra.letters.vec <- rep(0, nchar(ambig.name))
   
   for (j in 1:nchar(ambig.name)) {
-    # Iterate through kExtraLetters
+    # Iterate through .kExtraLetters
     for (h in 1:3) {
       num.char <- nchar(ambig.name)
       extra.letter.pos <- which(substring(ambig.name,
                                           1:num.char,
-                                          1:num.char)[j] == kExtraLetters[[h]])
+                                          1:num.char)[j] == .kExtraLetters[[h]])
       # Check to see letter is ambigular;
       # create vector to determine nrow of matrix
       if (length(extra.letter.pos) > 0) {
@@ -25,21 +25,21 @@ CalcNumLocAmbig <- function(ambig.name) {
   list(num.perms = num.perms, extra.letters.vec = extra.letters.vec)
 }
 ##############################################################
-kTwoLetters <- c("R", "Y", "M", "K", "S", "W")
-kThreeLetters <- c("B", "D", "H", "V")
-kFourLetters <- c("N")
-kExtraLetters <- list(kTwoLetters, kThreeLetters, kFourLetters)
+.kTwoLetters <- c("R", "Y", "M", "K", "S", "W")
+.kThreeLetters <- c("B", "D", "H", "V")
+.kFourLetters <- c("N")
+.kExtraLetters <- list(.kTwoLetters, .kThreeLetters, .kFourLetters)
 # The x.letters.list correspond element-wise to x.letters.
-kTwoLettersList <- list(c("G", "A"), c("T", "C"), c("A", "C"),
+.kTwoLettersList <- list(c("G", "A"), c("T", "C"), c("A", "C"),
                         c("G", "T"), c("G", "C"), c("A", "T"))
-kThreeLettersList <- list(c("A", "C", "T"), c("C", "T", "G"),
+.kThreeLettersList <- list(c("A", "C", "T"), c("C", "T", "G"),
                           c("A", "C", "G"), c("A", "T", "G"))
-kFourLettersList <- list(c("A", "C", "T", "G"))
-kExtraLettersList <- list(kTwoLettersList, kThreeLettersList, kFourLettersList)
+.kFourLettersList <- list(c("A", "C", "T", "G"))
+.kExtraLettersList <- list(.kTwoLettersList, .kThreeLettersList, .kFourLettersList)
 
 ###############################################################
 
-CalcPermutationMat <- function(ambig.name, num.perms) {
+.CalcPermutationMat <- function(ambig.name, num.perms) {
   num.char <- nchar(ambig.name)
   perm.mat <- matrix(substring(ambig.name, 1:num.char, 1:num.char),
                      nrow = prod(num.perms),
@@ -51,9 +51,9 @@ CalcPermutationMat <- function(ambig.name, num.perms) {
   for(j in 1:length(ambig.ind)){
     ir.ind.j <- ambig.ind[j]
     ambig.loc <-
-      which(kExtraLetters[[num.perms[ir.ind.j] - 1]] == perm.mat[1, ir.ind.j])
+      which(.kExtraLetters[[num.perms[ir.ind.j] - 1]] == perm.mat[1, ir.ind.j])
     replacement.letters <-
-      kExtraLettersList[[num.perms[ir.ind.j] - 1]][[ambig.loc]]
+      .kExtraLettersList[[num.perms[ir.ind.j] - 1]][[ambig.loc]]
     #The letters that get reinserted are permuted here.
     real.replace <- c()
     for (l in 1:length(replacement.letters)) {
@@ -72,7 +72,7 @@ CalcPermutationMat <- function(ambig.name, num.perms) {
 
 ###################################################################
 
-AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
+.AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
                          kmer.seq, kmer.list, kmer.wt.list, ambig.name) {
   #paste letters back together and overwrite xac matrix
   overwrite <- apply(perm.mat, 1, paste, collapse = "")
