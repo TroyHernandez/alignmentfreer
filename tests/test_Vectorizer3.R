@@ -34,8 +34,6 @@ test_that("CalcAmbigLetters works", {
                        .5, 0, 0, 0)))
 })
 
-CalcEmptyLetters(x,tbl,d,kmers,KMERS,method="Sufficient")
-  
 test_that("CalcEmptyLetters works", {
   expect_that(CalcEmptyLetters(tbl, statistic, kmers, method = "Sufficient"),
               equals(c(5 / 8, 1 / 8, 1 / 8, 1 / 8,

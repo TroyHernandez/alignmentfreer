@@ -1,7 +1,12 @@
 # test_Vectorizer2.R
 
+test_that("SanityCheck works", {
+  expect_that(SanityCheck(dna.seq = "gattaca"),
+              equals(NULL))
+})
+
 test_that("UpperCaser works", {
-  expect_that(UpperCaser(dna.seq = c("gattaca")),
+  expect_that(UpperCaser(dna.seq = "gattaca"),
               equals("GATTACA"))
 })
 

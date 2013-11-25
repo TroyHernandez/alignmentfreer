@@ -1,5 +1,29 @@
 # Vectorizer2.R
 
+SanityCheck <- function(dna.seq){
+  dna.seq.letters <- strsplit(dna.seq, "")[[1]]
+  k.AmbigLettersBig <- c("R", "Y", "M", "K", "S", "W", "B", "D", "H", "V", "N")
+  k.AmbigLettersSml <- c("r", "y", "m", "k", "s", "w", "b", "d", "h", "v", "n")
+  k.NucleotidesBig <- c("A", "C", "G", "T")
+  k.NucleotidesSml <- c("a", "c", "g", "t")
+  k.All.Letters <- c(k.AmbigLettersBig, k.AmbigLettersSml,
+                     k.NucleotidesBig, k.NucleotidesSml)
+  alphabet.len <- length(union(dna.seq.letters, k.All.Letters))
+  if (alphabet.len > 30) {
+    stop("Error: Nucleotide not recognized.\n
+        Only A, C, G, T, or ambiguous letters allowed.")
+  }
+  alphabet.len.big <- length(union(dna.seq.letters,
+                             c(k.AmbigLettersBig, k.NucleotidesBig)))
+  alphabet.len.sml <- length(union(dna.seq.letters,
+                             c(k.AmbigLettersSml, k.NucleotidesSml)))
+  
+  if (alphabet.len.big != 15 & alphabet.len.sml != 15) {
+    stop("Error: Mixture of upper and lower case letters used.
+        This is very atypical.  Check your data.")
+  }
+}
+
 UpperCaser <- function(dna.seq){
   if (sum(substring(dna.seq, 1, 1) == letters) > 0){
     ltrs=list(LETTERS)[[1]]

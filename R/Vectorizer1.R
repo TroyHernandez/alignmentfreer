@@ -9,9 +9,13 @@ source("Vectorizer5.R")
 source("Vectorizer6.R")
 #######################################################
 #Main function for calculating natural vectors
-Vectorizer <- function(dna.seq, kmer = 3, statistic = 3,
-                       composition = TRUE, concatenate = TRUE) {
+Vectorizer <- function(dna.seq, kmer = 1, statistic = 3,
+                       composition = TRUE, concatenate = TRUE,
+                       sanity.check = FALSE, verbose = 0) {
   
+  if (sanity.check == T) {
+    SanityCheck(dna.seq)
+  }
   dna.seq <- UpperCaser(dna.seq)
   range <- Ranger(kmer, concatenate)
   col.names <- KmerColNames(kmer, statistic, concatenate)
@@ -20,11 +24,17 @@ Vectorizer <- function(dna.seq, kmer = 3, statistic = 3,
   vec[1] <- nchar(dna.seq)
   
   for (k in range) {
-    cat("Calculating ", k, "-mer\n", sep = "")
+    if(verbose == 1) {
+      cat(".")      
+    }
+    
+    if(verbose == 2) {
+      cat("Calculating ", k, "-mer\n", sep = "")      
+    }
 #     Test string
-    dna.seq <- "NA"
-    dna.seq <- ""
-    dna.seq <- "GATTACA"
+#     dna.seq <- "NA"
+#     dna.seq <- ""
+#     dna.seq <- "GATTACA"
 #     dna.seq <- paste(sample(c("A","C","G","T","B","N"),12,replace=T),
 #                      collapse="")
     

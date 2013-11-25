@@ -137,7 +137,7 @@ CalcAmbigDescriptiveStats <- function(ans, kmer.list, kmer.wt.list,
                                       statistic, method) {
   
   if (statistic > 1) {
-    ans[2, ] <- unlist(lapply(1:length(kmers),
+    ans[2, ] <- unlist(lapply(1:length(kmer.list),
                          function(i, x, w) weighted.mean(x[[i]],w[[i]]),
                          x = kmer.list, w = kmer.wt.list))
   }
