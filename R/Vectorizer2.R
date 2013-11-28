@@ -78,7 +78,7 @@ CalculateVec <- function(kmer.seq, statistic = 3,
   #There aren't/are other letters
   if (length(tbl) == length(kmers)) {
     if (sum(names(tbl) != kmers) == 0) {
-      ans <- CalcRegLetters(kmer.seq, tbl, statistic, kmers, method)
+      ans <- .CalcRegLetters(kmer.seq, tbl, statistic, kmers, method)
     } else {
       ans <- .CalcAmbigLetters(kmer.seq, statistic, kmers, method)
     }

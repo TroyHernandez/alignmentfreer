@@ -48,10 +48,11 @@ KmerGenerator <- function(kmer) {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   ans[1, ] <- tbl
   
-  mean.kmer.list <- .CalcMeanKmerList(kmer.seq, tbl, statistic, kmers)
-  ans[2, ] <- mean.kmer.list$mean
-  kmer.list <- mean.kmer.list$list
-  
+  if (statistic > 1) {
+    mean.kmer.list <- .CalcMeanKmerList(kmer.seq, tbl, statistic, kmers)
+    ans[2, ] <- mean.kmer.list$mean
+    kmer.list <- mean.kmer.list$list
+  }
   ans <- .CalcDescriptiveStats(ans, kmer.list, statistic, method)
   
   if (statistic > 1) {
