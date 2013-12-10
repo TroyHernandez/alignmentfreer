@@ -1,1 +1,7 @@
+export(ConfirmDnaSeq)
+export(KmerGenerator)
+export(UpperCaser)
 export(Vectorizer)
+export(weighted.kur)
+export(weighted.skew)
+export(weighted.var)

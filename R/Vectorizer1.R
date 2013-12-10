@@ -87,7 +87,7 @@ Vectorizer <- function(dna.seq, kmer = 3, statistic = 3,
     } else {
       kmer.seq <- ""
     }
-    temp.vec <- CalculateVec(kmer.seq, statistic,
+    temp.vec <- .CalculateVec(kmer.seq, statistic,
                              kmer = k, method = "Sufficient")
     
     temp.cols <- .ColumnFinder(k, statistic, length(vec), concatenate)

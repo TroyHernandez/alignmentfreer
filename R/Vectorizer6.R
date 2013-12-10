@@ -94,6 +94,26 @@
 }
 
 ###################################################################
+#' Compute a weighted variance.
+#'
+#' @param x an object containing the values whose weighted variance is to be
+#' computed. 
+#' @param w a numerical vector of weights the same length as x giving the
+#' weights to use for elements of x. 
+#' @param na.rm a logical value indicating whether NA values in x should be
+#' stripped before the computation proceeds. 
+#' 
+#' @keywords vectorizer
+#' @export
+#'
+#' @examples
+#' 
+#' 
+#' ## GPA from Siegel 1994
+#' wt <- c(5,  5,  4,  1)/15
+#' x <- c(3.7,3.3,3.5,2.8)
+#' xv <- weighted.var(x, wt)
+#' 
 
 weighted.var <- function(x, w, na.rm = FALSE) {
   # https://stat.ethz.ch/pipermail/r-help/2008-July/168762.html
@@ -110,7 +130,26 @@ weighted.var <- function(x, w, na.rm = FALSE) {
 }
 
 ###################################################################
-
+#' Compute a weighted skewness.
+#'
+#' @param x an object containing the values whose weighted skewness is to be
+#' computed. 
+#' @param w a numerical vector of weights the same length as x giving the
+#' weights to use for elements of x. 
+#' @param na.rm a logical value indicating whether NA values in x should be
+#' stripped before the computation proceeds. 
+#' 
+#' @keywords vectorizer
+#' @export
+#'
+#' @examples
+#' 
+#' 
+#' ## GPA from Siegel 1994
+#' wt <- c(5,  5,  4,  1)/15
+#' x <- c(3.7,3.3,3.5,2.8)
+#' xs <- weighted.skew(x, wt)
+#'
 weighted.skew <- function(x, w, na.rm = FALSE) {
   # http://arxiv.org/abs/1304.6564
   # Lorenzo Rimoldini; accessed 11.19.13
@@ -128,7 +167,26 @@ weighted.skew <- function(x, w, na.rm = FALSE) {
 }
 
 ###################################################################
-
+#' Compute a weighted kurtosis.
+#'
+#' @param x an object containing the values whose weighted kurtosis is to be
+#' computed. 
+#' @param w a numerical vector of weights the same length as x giving the
+#' weights to use for elements of x. 
+#' @param na.rm a logical value indicating whether NA values in x should be
+#' stripped before the computation proceeds. 
+#' 
+#' @keywords vectorizer
+#' @export
+#'
+#' @examples
+#' 
+#' 
+#' ## GPA from Siegel 1994
+#' wt <- c(5,  5,  4,  1)/15
+#' x <- c(3.7,3.3,3.5,2.8)
+#' xk <- weighted.kur(x, wt)
+#' 
 weighted.kur <- function(x, w, na.rm = FALSE) {
   # http://arxiv.org/abs/1304.6564
   # Lorenzo Rimoldini; accessed 11.19.13

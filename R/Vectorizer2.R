@@ -1,5 +1,15 @@
 # Vectorizer2.R
 
+#' Confirms character is a valid DNA sequence.
+#'
+#' This function checks that a DNA sequence in character string format,
+#' e.g. "GATTACA", and confirms it consists only of upper or lower-case
+#' character vector consisting of A, C, T, G, or any of the IUPAC ambiguous
+#' nucleotide letters.
+#'
+#' @keywords vectorizer
+#' @export
+#' 
 ConfirmDnaSeq <- function(dna.seq){
   dna.seq.letters <- strsplit(dna.seq, "")[[1]]
   k.AmbigLettersBig <- c("R", "Y", "M", "K", "S", "W", "B", "D", "H", "V", "N")
@@ -24,6 +34,14 @@ ConfirmDnaSeq <- function(dna.seq){
   }
 }
 
+#' Converts a character string to upper-case letters.
+#'
+#' This function converts a character string of letters to an upper-case
+#' character string of letters.
+#'
+#' @keywords vectorizer
+#' @export
+#' 
 UpperCaser <- function(dna.seq){
   if (sum(substring(dna.seq, 1, 1) == letters) > 0){
     ltrs=list(LETTERS)[[1]]
@@ -58,14 +76,7 @@ UpperCaser <- function(dna.seq){
   kmer.colnames
 }
 
-################## calculate natural vectors ##################################
-### input DNA sequence consisting of "a","c","g","t", updated on 11/08/2011
-### output adjusted natural vector up to 40th dimension: nk, muk, D2k, E2k, E3k, ..., E8k
-### output: vector -- 40-dim natural vector
-###         length -- length of sequence
-###         other  -- number of letters other than a,c,g,t
-###         letter -- distinct letters in the sequence
-CalculateVec <- function(kmer.seq, statistic = 3,
+.CalculateVec <- function(kmer.seq, statistic = 3,
                          kmer = 3, method = "Sufficient") {
   
   seq.length <- length(kmer.seq)

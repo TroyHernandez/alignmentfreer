@@ -1,8 +1,14 @@
 # Vectorizer3.R
 
-
-#######################################################
-# k-mer generator in caps
+#' Creates a vector of kmers for a given k value.
+#'
+#' This function creates a vector of length 4^k consisting of the kmers for a
+#' given value of k. 
+#'
+#' @param kmer an integer that defines the kmer length to be calculated 
+#' @keywords vectorizer
+#' @export
+#' 
 KmerGenerator <- function(kmer) {
   
   dna <- c("A","C","G","T")
