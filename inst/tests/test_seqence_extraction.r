@@ -1,22 +1,22 @@
 context("Sequence extraction checks")
 
 test_that("gbk extraction works", {
-  expect_that(as.character(GetSeqGbk("data/abalone.gbk")),
+  expect_that(as.character(gbk("data/abalone.gbk", phylo = "virus")),
               equals(as.character(read.table("data/abalone_string.txt",
                                              stringsAsFactors = FALSE,
                                              header = TRUE))))
 })
 
 test_that("fasta extraction works", {
-  expect_that(as.character(GetSeqFasta("data/abalone.fasta", lower = TRUE)),
+  expect_that(as.character(fasta("data/abalone.fasta", lower = TRUE)),
               equals(as.character(read.table("data/abalone_string.txt",
                                              stringsAsFactors = FALSE,
                                              header = TRUE))))
 })
 
 test_that("gbk extraction equivalent fasta", {
-  fasta.test <- GetSeqFasta("data/abalone.fasta")
-  gbk.test <- GetSeqGbk("data/abalone.gbk", upper = TRUE)
+  fasta.test <- fasta("data/abalone.fasta")
+  gbk.test <- gbk("data/abalone.gbk", upper = TRUE)
   expect_that(as.character(fasta.test),
               equals(as.character(gbk.test)))
   expect_that(attributes(fasta.test)$accession,

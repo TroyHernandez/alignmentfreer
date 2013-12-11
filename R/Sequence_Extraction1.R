@@ -17,7 +17,7 @@
 #' @keywords vectorizer
 #' @export
 #' 
-gbk <- function(path, upper = FALSE){
+gbk <- function(path, upper = FALSE, phylo = c(NA, "virus")){
   
   # Reading in lines
   templines <- readLines(path)
@@ -75,15 +75,34 @@ gbk <- function(path, upper = FALSE){
   #---------------------------------------------------------
   # UnCapitalizing each letter
   if(upper == TRUE) {
-    ltrs=list(LETTERS)[[1]]
-    names(ltrs)=letters
+    ltrs <- list(LETTERS)[[1]]
+    names(ltrs) <- letters
     gbk <- paste(ltrs[strsplit(dnaseq, "")[[1]]], collapse = "")
   } else {
     gbk <- dnaseq
   }
   
+  #---------------------------------------------------------
+  # Extracting ORGANISM/phylogenetic info
+  if(phylo == "virus") {
+    # Get first part of baltimore predictor
+    temp <- strsplit(templines[1], " ")
+    temp <- temp[[1]][temp[[1]] != ""]
+    balt1 <- temp[5]
+    
+    viralphylo <- .GetVirusPhylo(templines, temp1, temp2)
+    
+    baltimore <- .GetBaltimore(balt1, balt2 = viralphylo$balt2,
+                               family = viralphylo$family)
+    phylo <- list(baltimore = baltimore, order = viralphylo$order,
+                  family = viralphylo$family, subfamily = viralphylo$subfamily,
+                  genus = viralphylo$genus)
+  } else {
+    phylo <- list()
+  }
+  
   attributes(gbk) <- list(gi = gi, accession = accession,
-                          bp = bp, organism = organism)
+                          bp = bp, organism = organism, phylo = phylo)
   class(gbk) <- "gbk"
   gbk
 }
@@ -91,7 +110,6 @@ gbk <- function(path, upper = FALSE){
 #=========================================================
 
 print.gbk <- function(x, ...) {
-  #   cat("ROC curve: ")
   print(as.character(x))
 }
 
@@ -156,6 +174,5 @@ fasta <- function(path, lower = FALSE){
 #=========================================================
 
 print.fasta <- function(x) {
-#   cat(attributes(x)$organism)
   print(as.character(x))
 }
