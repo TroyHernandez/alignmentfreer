@@ -1,6 +1,5 @@
 # Vectorizer6.R
-
-##############################################################
+#=========================================================
 
 .CalcNumLocAmbig <- function(ambig.name) {
   
@@ -24,7 +23,8 @@
   }
   list(num.perms = num.perms, extra.letters.vec = extra.letters.vec)
 }
-##############################################################
+#=========================================================
+
 .kTwoLetters <- c("R", "Y", "M", "K", "S", "W")
 .kThreeLetters <- c("B", "D", "H", "V")
 .kFourLetters <- c("N")
@@ -37,7 +37,7 @@
 .kFourLettersList <- list(c("A", "C", "T", "G"))
 .kExtraLettersList <- list(.kTwoLettersList, .kThreeLettersList, .kFourLettersList)
 
-###############################################################
+#=========================================================
 
 .CalcPermutationMat <- function(ambig.name, num.perms) {
   num.char <- nchar(ambig.name)
@@ -70,7 +70,7 @@
   perm.mat
 }
 
-###################################################################
+#=========================================================
 
 .AddToTblKmer <- function(perm.mat, kmers, reg.tbl, tbl,
                          kmer.seq, kmer.list, kmer.wt.list, ambig.name) {
@@ -93,7 +93,8 @@
   list(kmer.list = kmer.list, kmer.wt.list = kmer.wt.list, reg.tbl = reg.tbl)
 }
 
-###################################################################
+#=========================================================
+
 #' Compute a weighted variance.
 #'
 #' @param x an object containing the values whose weighted variance is to be
@@ -115,6 +116,8 @@
 #' xv <- weighted.var(x, wt)
 #' 
 
+#=========================================================
+
 weighted.var <- function(x, w, na.rm = FALSE) {
   # https://stat.ethz.ch/pipermail/r-help/2008-July/168762.html
   # By Gavin Simpson; accessed 11.18.13
@@ -129,7 +132,8 @@ weighted.var <- function(x, w, na.rm = FALSE) {
   (v1 ^ 2 / (v1 ^ 2 - v2)) * m2
 }
 
-###################################################################
+#=========================================================
+
 #' Compute a weighted skewness.
 #'
 #' @param x an object containing the values whose weighted skewness is to be
@@ -166,7 +170,8 @@ weighted.skew <- function(x, w, na.rm = FALSE) {
   (v1 ^ 3 / (v1 ^ 3 - 3 * v1 * v2 + 2 * v3)) * m3
 }
 
-###################################################################
+#=========================================================
+
 #' Compute a weighted kurtosis.
 #'
 #' @param x an object containing the values whose weighted kurtosis is to be

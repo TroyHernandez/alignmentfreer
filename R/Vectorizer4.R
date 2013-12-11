@@ -1,6 +1,5 @@
 # Vectorizer4.R
-
-#######################################################
+#=========================================================
 
 .CalcMeanKmerList <- function(kmer.seq, tbl, statistic, kmers) {
   kmer.list <- as.list(rep(0, length(kmers)))
@@ -18,7 +17,7 @@
   list(mean = ans.temp, list = kmer.list)
 }
 
-#########################################################################
+#=========================================================
 
 .CalcDescriptiveStats <- function(ans, kmer.list, statistic, method) {
   if (statistic > 2) {
@@ -37,7 +36,8 @@
   ans
 }
 
-##########################################################################
+#=========================================================
+
 .CorrectZeroCases <- function(ans, statistic, method = "Sufficient") {
   # Changes mean and moment entries with zero counts to
   # halfway mean and 0 moment
@@ -61,7 +61,7 @@
   ans
 }
 
-#########################################################################
+#=========================================================
 
 .CorrectSingletonCases <- function(ans, statistic, method = "Moment") {
   #Changes mean and moment entries with single counts to halfway mean and 0 moment
@@ -84,7 +84,7 @@
   ans
 }
 
-#######################################################################
+#=========================================================
 
 .CalcAmbigKmerList <- function(kmer.seq, tbl, ambig.names, kmers, ans) {
   
@@ -132,7 +132,8 @@
        tbl = reg.tbl, ans = ans)
 }
 
-#######################################################################
+#=========================================================
+
 .CalcAmbigDescriptiveStats <- function(ans, kmer.list, kmer.wt.list,
                                       statistic, method) {
   

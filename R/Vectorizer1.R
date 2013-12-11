@@ -1,5 +1,5 @@
 # Vectorizer.R
-
+#=========================================================
 
 library(e1071)
 source("Vectorizer2.R")
@@ -7,7 +7,7 @@ source("Vectorizer3.R")
 source("Vectorizer4.R")
 source("Vectorizer5.R")
 source("Vectorizer6.R")
-#######################################################
+#=========================================================
 
 #' Calculate a generalized vector from a DNA sequence.
 #'

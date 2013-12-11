@@ -1,4 +1,5 @@
 # Vectorizer3.R
+#=========================================================
 
 #' Creates a vector of kmers for a given k value.
 #'
@@ -25,7 +26,8 @@ KmerGenerator <- function(kmer) {
   kmer.list
 }
 
-#######################################################
+#=========================================================
+
 # Appends statistic name to kmer 
 .StatAppender <- function(kmers, statistic) {
   for (i in 1:statistic) {
@@ -48,7 +50,8 @@ KmerGenerator <- function(kmer) {
   col.names
 }
 
-##############################################################
+#=========================================================
+
 .CalcRegLetters <- function(kmer.seq, tbl, statistic, kmers,
                            method = "Sufficient") {
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
@@ -72,9 +75,7 @@ KmerGenerator <- function(kmer) {
   ans <- c(t(ans))
 }
 
-
-
-################################################################
+#=========================================================
 
 .CalcAmbigLetters <- function (kmer.seq, statistic, kmers,
                               method = "Sufficient") {
@@ -103,7 +104,8 @@ KmerGenerator <- function(kmer) {
   ans
 }
 
-##############################################################
+#=========================================================
+
 .CalcEmptyLetters=function(tbl, statistic, kmers, method = "Sufficient"){
   ans <- matrix(0, nrow = statistic, ncol = length(kmers))
   ans <- .CorrectZeroCases(ans, statistic, method)

@@ -1,6 +1,6 @@
 # Vectorizer5.R
+#=========================================================
 
-#########################################################################
 .SufficientStats <- function(kmer.list = kmer.list, j = j){
   if (j == 3) {
     ss <- unlist(lapply(kmer.list, var))
@@ -19,7 +19,8 @@
   ss
 }
 
-#########################################################################
+#=========================================================
+
 # .LmomentStats=function(kmer.list=kmer.list,j=j){
 #   if(j>5){
 #     cout("WARNING!!! Method Lmoments not currently able to handle dimension greater than 5; i.e. kurtosis.\n")
@@ -29,7 +30,7 @@
 #   ss
 # }
 
-#########################################################################
+#=========================================================
 
 .AllocateAmbigKmers <- function(ambig.name, kmers, reg.tbl,
                                tbl, kmer.seq, kmer.list, kmer.wt.list) {
@@ -50,7 +51,8 @@
   list(kmer.list = kmer.list, kmer.wt.list = kmer.wt.list, reg.tbl = reg.tbl)
 }
 
-#########################################################################
+#=========================================================
+
 .AmbigSufficientStats <- function(kmer.list, kmer.wt.list, statistic){
   if (statistic == 3) {
     ss <- unlist(lapply(1:length(kmer.list),

@@ -1,4 +1,5 @@
 # Vectorizer2.R
+#=========================================================
 
 #' Confirms character is a valid DNA sequence.
 #'
@@ -34,6 +35,8 @@ ConfirmDnaSeq <- function(dna.seq){
   }
 }
 
+#=========================================================
+
 #' Converts a character string to upper-case letters.
 #'
 #' This function converts a character string of letters to an upper-case
@@ -50,7 +53,9 @@ UpperCaser <- function(dna.seq){
   }
   dna.seq
 }
-#######################################################
+
+#=========================================================
+
 # Determines range for (un)concatenated vectors.
 .Ranger <- function(kmer, concatenate)  {
   if (concatenate) {
@@ -60,7 +65,8 @@ UpperCaser <- function(dna.seq){
   }
 }
 
-#######################################################
+#=========================================================
+
 .KmerColNames <- function(kmer = 3, statistic = 3, concatenate = TRUE) {
   
   #kmercolnames is final output
@@ -104,7 +110,8 @@ UpperCaser <- function(dna.seq){
   list(vector = ans, length = seq.length);
 }
 
-####################################################
+#=========================================================
+
 .ColumnFinder <- function(k, statistic, length.vec, concatenate) {
   # concatenate == F just removes the length column.
   if (!concatenate) {

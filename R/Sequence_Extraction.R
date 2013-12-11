@@ -1,8 +1,23 @@
 # Sequence_Extraction.R
+#=========================================================
 
 # path <- "/home/troy/Dropbox/alignmentfreer/data/abalone.gbk"
 
-GetSeqGbk <- function(path, upper = FALSE){
+#=========================================================
+
+#' Obtain the DNA sequence, and other information, from a gbk file.
+#'
+#' This function extracts a DNA sequence from a gbk file in addition to other 
+#' information; e.g. gi number, accession number, number of base pairs,
+#' and organism name.  A \code{gbk} class is output.  
+#'
+#' @param path the path to a gbk file
+#' @param upper logical indicating if lower-case nucleotides should be converted
+#' to upper-case
+#' @keywords vectorizer
+#' @export
+#' 
+gbk <- function(path, upper = FALSE){
   
   # Reading in lines
   templines <- readLines(path)
@@ -25,7 +40,7 @@ GetSeqGbk <- function(path, upper = FALSE){
     }
   }
   
-  ########################################################
+  #---------------------------------------------------------
   # Finding and writing dna sequence  
   templine <- character(0)
   
@@ -38,7 +53,7 @@ GetSeqGbk <- function(path, upper = FALSE){
   
   dnaseq <- templine
   
-  ########################################################
+  #---------------------------------------------------------
   # Attributes assigned here
   
   # Number of basepairs
@@ -46,18 +61,18 @@ GetSeqGbk <- function(path, upper = FALSE){
   temp <- temp[[1]][temp[[1]] != ""]
   bp <- as.numeric(temp[3])
   
-  ########################################################
+  #---------------------------------------------------------
   # Finding and writing gi/accession
   temp <- strsplit(templines[temp3], " ")
   temp <- temp[[1]][temp[[1]] != ""]
   accession <- temp[2]
   gi <- as.integer(substring(temp[3], 4, nchar(temp[3])))
   
-  ########################################################
+  #---------------------------------------------------------
   # organism extraction
   organism <- substr(templines[temp1], 13, nchar(templines[temp1]))
   
-  ########################################################
+  #---------------------------------------------------------
   # UnCapitalizing each letter
   if(upper == TRUE) {
     ltrs=list(LETTERS)[[1]]
@@ -69,18 +84,35 @@ GetSeqGbk <- function(path, upper = FALSE){
   
   attributes(gbk) <- list(gi = gi, accession = accession,
                           bp = bp, organism = organism)
-  class(gbk) <- "GBK"
+  class(gbk) <- "gbk"
   gbk
 }
 
-print.GBK <- function(x, ...) {
+#=========================================================
+
+print.gbk <- function(x, ...) {
   #   cat("ROC curve: ")
   print(as.character(x))
 }
 
-path <- "/home/troy/Dropbox/alignmentfreer/data/abalone.fasta"
+#=========================================================
 
-GetSeqFasta <- function(path, lower = FALSE){
+# path <- "/home/troy/Dropbox/alignmentfreer/data/abalone.fasta"
+
+#=========================================================
+#' Obtain the DNA sequence, and other information, from a fasta file.
+#'
+#' This function extracts a DNA sequence from a fasta file in addition to other 
+#' information; e.g. gi number, accession number, number of base pairs,
+#' and organism name.  A \code{fasta} class is output.  
+#'
+#' @param path the path to a gbk file
+#' @param lower logical indicating if upper-case nucleotides should be converted
+#' to lower-case
+#' @keywords vectorizer
+#' @export
+#' 
+fasta <- function(path, lower = FALSE){
   
   # Reading in lines
   templines <- readLines(path)
@@ -91,7 +123,7 @@ GetSeqFasta <- function(path, lower = FALSE){
   # Removing white-space
   organism <- substring(info[[1]][5], 2, nchar(info[[1]][5]))
   
-  ########################################################
+  #---------------------------------------------------------
   # Finding and writing dna sequence  
   templine <- character(0)
   
@@ -104,7 +136,7 @@ GetSeqFasta <- function(path, lower = FALSE){
   
   bp <- nchar(dnaseq)
 
-  ########################################################
+  #---------------------------------------------------------
   # UnCapitalizing each letter
   
   if(lower == TRUE) {
@@ -117,11 +149,13 @@ GetSeqFasta <- function(path, lower = FALSE){
   
   attributes(fasta) <- list(organism = organism, accession = accession,
                             gi = gi, bp = bp)
-  class(fasta) <- "FASTA"
+  class(fasta) <- "fasta"
   fasta
 }
 
-print.FASTA <- function(x) {
+#=========================================================
+
+print.fasta <- function(x) {
 #   cat(attributes(x)$organism)
   print(as.character(x))
 }
