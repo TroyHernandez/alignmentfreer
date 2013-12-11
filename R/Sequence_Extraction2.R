@@ -6,7 +6,6 @@
 #=========================================================
 
 #' Obtain the phylogenetic information from a virus' gbk file.
-# #' @export 
 .GetVirusPhylo <- function(templines, temp1, temp2) {
   templine <- paste(templines[temp1:temp2], collapse = "; ")
   templine <- substring(templine, 13, nchar(templine))
@@ -27,7 +26,6 @@
 #=========================================================
 
 #' Obtain the phylogenetic information from a virus' gbk file.
-# #' @export 
 .GetBaltimore <- function(balt1, balt2 = viralphylo$balt2,
                           family = viralphylo$family) {
   Balt=""

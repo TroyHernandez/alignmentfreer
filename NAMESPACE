@@ -1,3 +1,5 @@
+export(.GetBaltimore)
+export(.GetVirusPhylo)
 export(ConfirmDnaSeq)
 export(KmerGenerator)
 export(UpperCaser)

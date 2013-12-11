@@ -7,10 +7,12 @@ Author: Troy Hernandez <troy.a.hernandez@gmail.com>
 Maintainer: Troy Hernandez <troy.a.hernandez@gmail.com>
 License: GPL (>= 2)
 Collate:
-    'Sequence_Extraction.R'
     'Vectorizer1.R'
     'Vectorizer2.R'
     'Vectorizer3.R'
     'Vectorizer4.R'
     'Vectorizer5.R'
     'Vectorizer6.R'
+    'Sequence_Extraction1.R'
+    'Sequence_Extraction2.R'
+    'Sequence_Extraction3.R'
