@@ -1,7 +1,7 @@
 context("Sequence extraction checks")
 
 test_that("gbk extraction works", {
-  expect_that(as.character(gbk("data/abalone.gbk", phylo = "virus")),
+  expect_that(as.character(gbk("data/abalone.gbk")),
               equals(as.character(read.table("data/abalone_string.txt",
                                              stringsAsFactors = FALSE,
                                              header = TRUE))))
