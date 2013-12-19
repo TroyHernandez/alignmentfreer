@@ -1,4 +1,5 @@
 # test_Vectorizer3.R
+context("Vectorizer3 checks")
 
 test_that("KmerGenerator works", {
   expect_that(KmerGenerator(kmer = 1),
@@ -6,7 +7,7 @@ test_that("KmerGenerator works", {
 })
 
 test_that("CalcRegLetters works", {
-  expect_that(CalcRegLetters(kmer.seq = c("G", "A", "T", "T", "A", "C", "A"),
+  expect_that(.CalcRegLetters(kmer.seq = c("G", "A", "T", "T", "A", "C", "A"),
                              tbl = c(A = 3, C = 1, G = 1, T = 2),
                              statistic = 3, kmers = c("A", "C", "G", "T"),
                              method = "Sufficient"),
@@ -16,7 +17,7 @@ test_that("CalcRegLetters works", {
 })
 
 test_that("CalcRegLetters works", {
-  expect_that(CalcRegLetters(kmer.seq = c("G", "A", "T", "T", "A", "C", "A"),
+  expect_that(.CalcRegLetters(kmer.seq = c("G", "A", "T", "T", "A", "C", "A"),
                              tbl = c(A = 3, C = 1, G = 1, T = 2),
                              statistic = 3, kmers = c("A", "C", "G", "T"),
                              method = "Sufficient"),
@@ -26,7 +27,7 @@ test_that("CalcRegLetters works", {
 })
 
 test_that("CalcAmbigLetters works", {
-  expect_that(CalcAmbigLetters(kmer.seq = c("N", "A"),
+  expect_that(.CalcAmbigLetters(kmer.seq = c("N", "A"),
                              statistic = 3, kmers = c("A", "C", "G", "T"),
                              method = "Sufficient"),
               equals(c(5 / 8, 1 / 8, 1 / 8, 1 / 8,
@@ -35,8 +36,12 @@ test_that("CalcAmbigLetters works", {
 })
 
 test_that("CalcEmptyLetters works", {
-  expect_that(CalcEmptyLetters(tbl, statistic, kmers, method = "Sufficient"),
-              equals(c(5 / 8, 1 / 8, 1 / 8, 1 / 8,
-                       9 / 5, 1, 1, 1,
-                       .5, 0, 0, 0)))
+  expect_that(.CalcEmptyLetters(tbl = c(0, 
+                                        AA = 0, AC = 0, AG = 0, AT = 0,
+                                        CA = 0, CC = 0, CG = 0, CT = 0,
+                                        GA = 0, GC = 0, GG = 0, GT = 0,
+                                        TA = 0, TC = 0, TG = 0, TT = 0),
+                                statistic = 3, kmers = KmerGenerator(2),
+                                method = "Sufficient"),
+              equals(c(rep(0, 16), rep(.5, 16), rep(0, 16))))
 })

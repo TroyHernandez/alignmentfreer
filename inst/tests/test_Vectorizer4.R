@@ -1,7 +1,8 @@
 #test_Vectorizer4.R
+context("Vectorizer4 checks")
 
-test_that("CalcMeanKmerList works", {
-  expect_that(CalcMeanKmerList(kmer.seq = c("G", "A", "T", "T", "A", "C", "A"),
+test_that(".CalcMeanKmerList works", {
+  expect_that(.CalcMeanKmerList(kmer.seq = c("G", "A", "T", "T", "A", "C", "A"),
                                tbl = table(c("G", rep("A", 3),
                                              rep("T", 2), "C")),
                                statistic = 3,
@@ -11,8 +12,8 @@ test_that("CalcMeanKmerList works", {
                                       c(1 / 7), c(3 / 7, 4 / 7)))))
 })
 
-test_that("CalcDescriptiveStats works", {
-  expect_that(CalcDescriptiveStats(ans = matrix(rep(0, 12), nrow = 3),
+test_that(".CalcDescriptiveStats works", {
+  expect_that(.CalcDescriptiveStats(ans = matrix(rep(0, 12), nrow = 3),
                                    kmer.list = list(c(2 / 7, 5 / 7, 7 / 7),
                                                     c(6 / 7), c(1 / 7),
                                                     c(3 / 7, 4 / 7)),
@@ -22,8 +23,8 @@ test_that("CalcDescriptiveStats works", {
                        NA, var( c(3 / 7, 4 / 7)))))
 })
 
-test_that("CalcAmbigKmerList works", {
-  expect_that(CalcAmbigKmerList(kmer.seq = c("N", "A"),
+test_that(".CalcAmbigKmerList works", {
+  expect_that(.CalcAmbigKmerList(kmer.seq = c("N", "A"),
                                 tbl = c(A = 1, N = 1),
                                 ambig.names = c("A", "N"),
                                 kmers = c("A", "C", "G", "T"),
@@ -36,8 +37,8 @@ test_that("CalcAmbigKmerList works", {
                                          .25, 0, 0, .25, 0, 0), nrow = 3))))
 })
 
-test_that("CalcAmbigDescriptiveStats works", {
-  expect_that(CalcAmbigDescriptiveStats(ans = matrix(c(1.25, 0, 0, .25, 0, 0,
+test_that(".CalcAmbigDescriptiveStats works", {
+  expect_that(.CalcAmbigDescriptiveStats(ans = matrix(c(1.25, 0, 0, .25, 0, 0,
                                                        .25, 0, 0, .25, 0, 0),
                                                      nrow = 3),
                                         kmer.list = list(A = c(2, 1), C = 1,

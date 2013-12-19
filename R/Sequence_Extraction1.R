@@ -20,7 +20,7 @@
 #' @keywords vectorizer
 #' @export
 #' 
-gbk <- function(path, upper = FALSE, phylo = c(NA, "virus")){
+gbk <- function(path, upper = FALSE, phylo = NA){
   
   # Reading in lines
   templines <- readLines(path)
@@ -87,21 +87,23 @@ gbk <- function(path, upper = FALSE, phylo = c(NA, "virus")){
   
   #---------------------------------------------------------
   # Extracting ORGANISM/phylogenetic info
-  if(phylo == "virus") {
-    # Get first part of baltimore predictor
-    temp <- strsplit(templines[1], " ")
-    temp <- temp[[1]][temp[[1]] != ""]
-    balt1 <- temp[5]
-    
-    viralphylo <- .GetVirusPhylo(templines, temp1, temp2)
-    
-    baltimore <- .GetBaltimore(balt1, balt2 = viralphylo$balt2,
-                               family = viralphylo$family)
-    phylo <- list(baltimore = baltimore, order = viralphylo$order,
-                  family = viralphylo$family, subfamily = viralphylo$subfamily,
-                  genus = viralphylo$genus)
-  } else {
+  if(is.na(phylo)) {
     phylo <- list()
+  } else {
+    if (phylo == "virus") {
+      # Get first part of baltimore predictor
+      temp <- strsplit(templines[1], " ")
+      temp <- temp[[1]][temp[[1]] != ""]
+      balt1 <- temp[5]
+      
+      viralphylo <- .GetVirusPhylo(templines, temp1, temp2)
+      
+      baltimore <- .GetBaltimore(balt1, balt2 = viralphylo$balt2,
+                                 family = viralphylo$family)
+      phylo <- list(baltimore = baltimore, order = viralphylo$order,
+                    family = viralphylo$family, subfamily = viralphylo$subfamily,
+                    genus = viralphylo$genus)
+    }
   }
   
   attributes(gbk) <- list(gi = gi, accession = accession,

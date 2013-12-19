@@ -1,4 +1,5 @@
 # test_Vectorizer1.R
+context("Vectorizer1 checks")
 
 test_that("Vectorizer works", {
   expect_that(as.numeric(Vectorizer(dna.seq = "GATTACA", kmer = 1)),
