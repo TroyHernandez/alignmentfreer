@@ -1,0 +1,10 @@
+0.102684	gi|106006027	Cyprinid herpesvirus 3	Cyprinid herpesvirus 3	Cyprinivirus	Unassigned	Alloherpesviridae		gi|388262476	Anguillid herpesvirus 1	Anguillid herpesvirus 1	Cyprinivirus	Unassigned	Alloherpesviridae
+0.0213629	gi|106006027	Cyprinid herpesvirus 3	Cyprinid herpesvirus 3	Cyprinivirus	Unassigned	Alloherpesviridae		gi|109638461	Ranid herpesvirus 1	Ranid herpesvirus 1	Batrachovirus	Unassigned	Alloherpesviridae
+0.0378196	gi|106006027	Cyprinid herpesvirus 3	Cyprinid herpesvirus 3	Cyprinivirus	Unassigned	Alloherpesviridae		gi|109638594	Ranid herpesvirus 2	Ranid herpesvirus 2	Batrachovirus	Unassigned	Alloherpesviridae
+0.0270958	gi|9626821	Ictalurid herpesvirus 1	Ictalurid herpesvirus 1	Ictalurivirus	Unassigned	Alloherpesviridae		gi|388262476	Anguillid herpesvirus 1	Anguillid herpesvirus 1	Cyprinivirus	Unassigned	Alloherpesviridae
+0.0265943	gi|9626821	Ictalurid herpesvirus 1	Ictalurid herpesvirus 1	Ictalurivirus	Unassigned	Alloherpesviridae		gi|106006027	Cyprinid herpesvirus 3	Cyprinid herpesvirus 3	Cyprinivirus	Unassigned	Alloherpesviridae
+0.0331886	gi|9626821	Ictalurid herpesvirus 1	Ictalurid herpesvirus 1	Ictalurivirus	Unassigned	Alloherpesviridae		gi|109638461	Ranid herpesvirus 1	Ranid herpesvirus 1	Batrachovirus	Unassigned	Alloherpesviridae
+0.035936	gi|9626821	Ictalurid herpesvirus 1	Ictalurid herpesvirus 1	Ictalurivirus	Unassigned	Alloherpesviridae		gi|109638594	Ranid herpesvirus 2	Ranid herpesvirus 2	Batrachovirus	Unassigned	Alloherpesviridae
+0.0187425	gi|109638461	Ranid herpesvirus 1	Ranid herpesvirus 1	Batrachovirus	Unassigned	Alloherpesviridae		gi|388262476	Anguillid herpesvirus 1	Anguillid herpesvirus 1	Cyprinivirus	Unassigned	Alloherpesviridae
+0.0756338	gi|109638461	Ranid herpesvirus 1	Ranid herpesvirus 1	Batrachovirus	Unassigned	Alloherpesviridae		gi|109638594	Ranid herpesvirus 2	Ranid herpesvirus 2	Batrachovirus	Unassigned	Alloherpesviridae
+0.0273814	gi|109638594	Ranid herpesvirus 2	Ranid herpesvirus 2	Batrachovirus	Unassigned	Alloherpesviridae		gi|388262476	Anguillid herpesvirus 1	Anguillid herpesvirus 1	Cyprinivirus	Unassigned	Alloherpesviridae

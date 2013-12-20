@@ -3,8 +3,10 @@ context("CompTrans checks")
 
 test_that("CompositionTransformations works", {
   vec <- Vectorizer(dna.seq = "GATTACA", kmer = 2, statistic = 1)
+  
   kGattaca1Mer <- c(3 / 7, 1 / 7, 1 / 7, 2 / 7)
   kExp2Mer <- outer(kGattaca1Mer, kGattaca1Mer)
+  
   test.value <- CompTransform(vec, kmer = 2, statistic = 1)
   target.value <- c(7, 3 / 7, 1 / 7, 1 / 7, 2 / 7,
                     (0 / 6 - kExp2Mer[1, 1]) / sqrt(kExp2Mer[1, 1]),
@@ -23,6 +25,8 @@ test_that("CompositionTransformations works", {
                     (0 / 6 - kExp2Mer[4, 2]) / sqrt(kExp2Mer[4, 2]),
                     (0 / 6 - kExp2Mer[4, 3]) / sqrt(kExp2Mer[4, 3]),
                     (1 / 6 - kExp2Mer[4, 4]) / sqrt(kExp2Mer[4, 4]))
+  
   names(target.value) <- names(test.value)
+  
   expect_that(as.numeric(test.value), equals(target.value))
 })

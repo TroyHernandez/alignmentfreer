@@ -51,11 +51,12 @@ pasc <- function(path, similarity = TRUE) {
   pasc <- as.matrix(as.dist(pasc, upper = T, diag = T), nrow = nvirus)
   #Fills in the diagonal of the matrix
   diag(pasc) <- 1
-  rownames(pasc) <- colnames(pasc) <- c(gi1[ord][1], gi2[ord][1:(nvirus - 1)])
   
   if (similarity == F) {
     pasc = 1 - pasc
   }
+  rownames(pasc) <- colnames(pasc) <- c(gi1[ord][1], gi2[ord][1:(nvirus - 1)])
+  
   #indx is the classification information of the first virus.
   indx <- templines2[1, 3:7]
   
@@ -71,7 +72,7 @@ pasc <- function(path, similarity = TRUE) {
   colnames(indx)[c(1, 7)] <- c("GI", "Family/Genus")
   rownames(indx) <- 1:nvirus
   
-  attributes(pasc) <- list(index = data.frame(indx), similarity = similarity)
+  attributes(pasc) <- list(index = indx, similarity = similarity)
   class(pasc) <- "pasc"
   pasc
 }
@@ -79,5 +80,8 @@ pasc <- function(path, similarity = TRUE) {
 #=========================================================
 
 print.pasc <- function(x, ...) {
-  print(as.matrix(x))
+  row.names <- attributes(x)$index[,1]
+  x <- matrix(x, nrow = sqrt(length(x)))
+  rownames(x) <- colnames(x) <- row.names
+  print(x)
 }
