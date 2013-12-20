@@ -16,7 +16,7 @@
 #' 
 CompTransform <- function(vec, kmer = 3, statistic = 3) {
     
-  if (kmer == 2) {
+  if (kmer < 2) {
     stop("This function only works for kmers with k > 1!")
   }
   

@@ -2,7 +2,7 @@
 \alias{gbk}
 \title{Obtain the DNA sequence, and other information, from a gbk file.}
 \usage{
-  gbk(path, upper = FALSE, phylo = c(NA, "virus"))
+  gbk(path, upper = FALSE, phylo = NA)
 }
 \arguments{
   \item{path}{the path to a gbk file}
