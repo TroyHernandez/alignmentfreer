@@ -2,7 +2,7 @@
 \alias{weighted.skew}
 \title{Compute a weighted skewness.}
 \usage{
-  weighted.skew(x, w, na.rm = FALSE)
+weighted.skew(x, w, na.rm = FALSE)
 }
 \arguments{
   \item{x}{an object containing the values whose weighted
@@ -15,7 +15,7 @@
   in x should be stripped before the computation proceeds.}
 }
 \description{
-  Compute a weighted skewness.
+Compute a weighted skewness.
 }
 \examples{
 ## GPA from Siegel 1994

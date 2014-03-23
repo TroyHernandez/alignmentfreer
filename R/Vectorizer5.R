@@ -6,15 +6,14 @@
     ss <- unlist(lapply(kmer.list, var))
   }
   if (j == 4) {
-    ss <- unlist(lapply(kmer.list, skewness))
+    ss <- unlist(lapply(kmer.list, e1071::skewness))
   }
   if (j == 5) {
-    ss <- unlist(lapply(kmer.list, kurtosis))
+    ss <- unlist(lapply(kmer.list, e1071::kurtosis))
   }
   if (j > 5) {
-    cout("WARNING!!! Method Sufficient not able to handle
+    stop("WARNING!!! Method Sufficient not able to handle
          statistics greater than 5; i.e. kurtosis.\n")
-    stop()
   }
   ss
 }
@@ -70,9 +69,8 @@
                         x = kmer.list, w = kmer.wt.list))
   }
   if (statistic > 5) {
-    cout("WARNING!!! Method Sufficient not able to handle
+    stop("WARNING!!! Method Sufficient not able to handle
          statistics greater than 5.\n")
-    stop()
   }
   ss
 }

@@ -1,20 +1,11 @@
 Package: alignmentfreer
 Title: Tools for creating alignment free vectorizations of genome sequences.
-Description: alignmentfreer is a package for converting genome sequences to
-    k-mer, composition, natural, and generalized vectors.
 Version: 0.1
+Date: 2014-01-24
 Author: Troy Hernandez <troy.a.hernandez@gmail.com>
 Maintainer: Troy Hernandez <troy.a.hernandez@gmail.com>
-License: GPL (>= 2)
-Collate:
-    'Vectorizer1.R'
-    'Vectorizer2.R'
-    'Vectorizer3.R'
-    'Vectorizer4.R'
-    'Vectorizer5.R'
-    'Vectorizer6.R'
-    'Sequence_Extraction1.R'
-    'Sequence_Extraction2.R'
-    'Sequence_Extraction3.R'
-    'Pasc_Encoder.R'
-    'CompositionTransformation1.R'
+Description: alignmentfreer is a package for converting genome sequences to
+    k-mer, composition, natural, and generalized vectors.
+License: GPL-2
+Depends:
+    e1071

@@ -28,7 +28,8 @@
       } else if (method == "Sufficient") {
         ans[j, ] <- .SufficientStats(kmer.list, j)
       } else if (method == "Lmoment") {
-        ans[j, ] <- .LmomentStats(kmer.list, j)
+        stop("LMoment method not ready.")
+#         ans[j, ] <- .LmomentStats(kmer.list, j)
       }
     }
   }
@@ -146,16 +147,14 @@
   if (statistic > 2) {
     for (j in 3:statistic) {
       if (method == "Moment") {
-        cat("Moment method not ready for ambiguous letters.")
-        stop()
-        ans[j, ] <- unlist(lapply(lapply(kmer.list, "^", (j - 1)), 
-                                  sum)) / ans[1, ]
+        stop("Moment method not ready for ambiguous letters.")
+#         ans[j, ] <- unlist(lapply(lapply(kmer.list, "^", (j - 1)), 
+#                                   sum)) / ans[1, ]
       } else if (method == "Sufficient") {
         ans[j, ] <- .AmbigSufficientStats(kmer.list, kmer.wt.list, j)
       } else if (method == "Lmoment") {
-        cat("LMoment method not ready for ambiguous letters.")
-        stop()
-        ans[j, ] <- LmomentStats(kmer.list, j)
+        stop("LMoment method not ready for ambiguous letters.")
+#         ans[j, ] <- LmomentStats(kmer.list, j)
       }
     }
   }

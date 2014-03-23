@@ -26,8 +26,7 @@
 #=========================================================
 
 # Obtain the phylogenetic information from a virus' gbk file.
-.GetBaltimore <- function(balt1, balt2 = viralphylo$balt2,
-                          family = viralphylo$family) {
+.GetBaltimore <- function(balt1, balt2, family) {
   Balt=""
   
   if (balt2 == "Deltavirus") Balt <- "V"

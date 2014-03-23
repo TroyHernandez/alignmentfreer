@@ -8,6 +8,8 @@
 #' character vector consisting of A, C, T, G, or any of the IUPAC ambiguous
 #' nucleotide letters.
 #'
+#' @param dna.seq an upper or lower-case character vector consisting of A, C, T,
+#'   G, or any of the IUPAC ambiguous nucleotide letters
 #' @keywords vectorizer
 #' @export
 #' 
@@ -42,6 +44,8 @@ ConfirmDnaSeq <- function(dna.seq){
 #' This function converts a character string of letters to an upper-case
 #' character string of letters.
 #'
+#' @param dna.seq an upper or lower-case character vector consisting of A, C, T,
+#'   G, or any of the IUPAC ambiguous nucleotide letters
 #' @keywords vectorizer
 #' @export
 #' 

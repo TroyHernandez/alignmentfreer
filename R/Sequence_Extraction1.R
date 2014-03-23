@@ -14,8 +14,7 @@
 #' @param path the path to a gbk file
 #' @param upper logical indicating if lower-case nucleotides should be converted
 #' to upper-case
-#' @param character string indicating type of organism and
-#' if phylogenetic information should be returned.
+#' @param phylo string or \code{NA} indicating if phylogenetic information should be returned.
 #' Currently, only \code{"virus"} option is working.
 #' @keywords vectorizer
 #' @export

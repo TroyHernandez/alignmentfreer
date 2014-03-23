@@ -2,7 +2,7 @@
 \alias{weighted.kur}
 \title{Compute a weighted kurtosis.}
 \usage{
-  weighted.kur(x, w, na.rm = FALSE)
+weighted.kur(x, w, na.rm = FALSE)
 }
 \arguments{
   \item{x}{an object containing the values whose weighted
@@ -15,7 +15,7 @@
   in x should be stripped before the computation proceeds.}
 }
 \description{
-  Compute a weighted kurtosis.
+Compute a weighted kurtosis.
 }
 \examples{
 ## GPA from Siegel 1994

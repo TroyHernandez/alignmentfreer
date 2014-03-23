@@ -2,7 +2,7 @@
 \alias{weighted.var}
 \title{Compute a weighted variance.}
 \usage{
-  weighted.var(x, w, na.rm = FALSE)
+weighted.var(x, w, na.rm = FALSE)
 }
 \arguments{
   \item{x}{an object containing the values whose weighted
@@ -15,7 +15,7 @@
   in x should be stripped before the computation proceeds.}
 }
 \description{
-  Compute a weighted variance.
+Compute a weighted variance.
 }
 \examples{
 ## GPA from Siegel 1994

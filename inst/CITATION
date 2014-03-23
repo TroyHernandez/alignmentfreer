@@ -1,0 +1,6 @@
+bibentry("Manual",
+         title = "alignmentfreer",
+         author = person("Troy Hernandez"),
+         year   = version$year,
+         url    = "https://github.com/TroyHernandez/alignmentfreer"
+)
